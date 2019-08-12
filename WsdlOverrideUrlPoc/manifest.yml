@@ -2,6 +2,7 @@
 applications:
   - name: wsdl-poc
     stack: windows
+    random-route: true
     memory: 512M
     buildpacks:
       - hwc_buildpack

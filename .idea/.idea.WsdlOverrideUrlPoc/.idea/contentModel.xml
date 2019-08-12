@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Projects\wcf-pcf" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="WsdlOverrideUrlPoc" t="IncludeRecursive">
+        <e p="App_Data" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="IService1.cs" t="Include" />
+        <e p="LocationOverrideExporter.cs" t="Include" />
+        <e p="manifest.yml" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Service1.svc" t="Include" />
+        <e p="Service1.svc.cs" t="Include" />
+        <e p="SingleFileExporter.cs" t="Include" />
+        <e p="WcfWsdlUrlFixHttpModule.cs" t="Include" />
+        <e p="Web.config" t="Include" />
+        <e p="Web.Debug.config" t="Include" />
+        <e p="Web.Release.config" t="Include" />
+        <e p="WsdlExtensions.cs" t="Include" />
+        <e p="WsdlExtensionsConfig.cs" t="Include" />
+        <e p="WsdlOverrideUrlPoc.csproj" t="IncludeRecursive" />
+        <e p="WsdlUtils.cs" t="Include" />
+      </e>
+      <e p="WsdlOverrideUrlPoc.sln" t="IncludeFlat" />
+    </e>
+    <e p="C:\Users\astakhov\.Rider2019.2\config\extensions" t="IncludeRecursive" />
+    <e p="C:\Users\astakhov\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\astakhov\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_WsdlOverrideUrlPoc.-1550122120.00" t="ExcludeRecursive" />
+  </component>
+</project>
