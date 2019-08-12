@@ -1,0 +1,7 @@
+---
+applications:
+  - name: wsdl-poc
+    stack: windows
+    memory: 512M
+    buildpacks:
+      - hwc_buildpack
