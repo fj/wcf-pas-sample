@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: wsdl-poc
+  - name: wsdl-poc-fixed
     stack: windows
     memory: 512M
     buildpacks:
