@@ -10,23 +10,26 @@ namespace WsdlOverrideUrlPoc
 {
     class LocationOverrideExporter
     {
-        Uri location;
-        Dictionary<object, string> queryFromDoc = new Dictionary<object, string>();
+        Uri _location;
+        Dictionary<object, string> _queryFromDoc = new Dictionary<object, string>();
 
-     
+
+        private Uri Rewrite(string existing) => new Uri(_location, new Uri(existing).PathAndQuery);
+        
 
         public void ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext context)
         {
+            var scheme = HttpContext.Current.Request.Headers["X-Forwarded-Proto"] ?? HttpContext.Current.Request.Url.Scheme;
+            var host = HttpContext.Current.Request.Url.Host;
+
+            _location = new Uri($"{scheme}://{host}");
+            
             foreach (object extension in context.WsdlPort.Extensions)
             {
                 SoapAddressBinding addr = (extension as SoapAddressBinding);
                 if (addr != null)
                 {
-                    var scheme = HttpContext.Current.Request.Headers["X-Forwarded-Proto"] ?? HttpContext.Current.Request.Url.Scheme;
-                    var host = HttpContext.Current.Request.Url.Host;
-                    var existingUri = new Uri(addr.Location);
-                    var newUri = new Uri(new Uri($"{scheme}://{host}"), existingUri.PathAndQuery);
-                    addr.Location = newUri.ToString();
+                    addr.Location = Rewrite(addr.Location).ToString();
                 }
             }
 
@@ -54,13 +57,13 @@ namespace WsdlOverrideUrlPoc
                 {
                     key = key + "=wsdl" + num++;
                 }
-                queryFromDoc.Add(description2, key);
+                _queryFromDoc.Add(description2, key);
             }
             int num2 = 0;
             foreach (XmlSchema schema in xsds.Schemas())
             {
                 string str2 = "xsd=xsd" + num2++;
-                queryFromDoc.Add(schema, str2);
+                _queryFromDoc.Add(schema, str2);
             }
         }
 
@@ -73,8 +76,8 @@ namespace WsdlOverrideUrlPoc
                     ServiceDescription description = wsdls[import.Namespace ?? string.Empty];
                     if (description != null)
                     {
-                        string query = queryFromDoc[description];
-                        import.Location = this.location + "?" + query;
+                        string query = _queryFromDoc[description];
+                        import.Location = this._location + "?" + query;
                     }
                 }
             }
@@ -98,8 +101,8 @@ namespace WsdlOverrideUrlPoc
                     {
                         if (schema != xsdDoc)
                         {
-                            string query = queryFromDoc[schema];
-                            external.SchemaLocation = this.location + "?" + query;
+                            string query = _queryFromDoc[schema];
+                            external.SchemaLocation = this._location + "?" + query;
                             break;
                         }
                     }
